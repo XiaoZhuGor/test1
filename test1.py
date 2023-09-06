@@ -53,10 +53,7 @@ def preprocess_text(text):
     return cleaned_text
 
 # Load your pre-trained model (model1)
-models = joblib.load("tolonglah.pkl")
-
-# Use the specific model from the dictionary
-model1 = models['model1']
+model1 = joblib.load("tolonglah.pkl")
 
 # Load your CSV data into a DataFrame
 data = pd.read_csv('Tweets.csv', encoding='latin1')
