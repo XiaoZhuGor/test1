@@ -26,7 +26,7 @@ if model_file:
         # Preprocess the input text using the same vectorizer used during training
         # Replace 'vectorizer' with your actual vectorizer
         # Example: vectorizer = your_actual_vectorizer
-        input_features = vectorizer.transform([input_text])
+        input_features = your_actual_vectorizer.transform([input_text])
 
         # Convert input_features to a NumPy array and reshape it
         input_features = np.array(input_features)
@@ -42,5 +42,5 @@ if model_file:
             prediction = make_prediction(user_input, selected_model)
             st.write(f"Prediction using {selected_model}: {prediction}")
 
-# Note: You should replace 'vectorizer' with the actual vectorizer used during training.
+# Note: You should replace 'your_actual_vectorizer' with the actual variable name of your vectorizer.
 # You may also need to preprocess the input text further to match the preprocessing done during training.
