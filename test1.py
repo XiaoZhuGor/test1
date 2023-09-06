@@ -1,5 +1,6 @@
 import streamlit as st
 import joblib
+import numpy as np  # Add this import
 
 # Create a file uploader to allow users to upload the model file
 model_file = st.file_uploader("Upload model file (.pkl)", type=["pkl"])
