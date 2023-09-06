@@ -9,6 +9,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from scipy.sparse import hstack
 import numpy as np
 
+# Download the NLTK stopwords resource (only need to do this once)
+nltk.download('stopwords')
 # Load your pre-trained model (model1)
 model1 = joblib.load("tolonglah.pkl")
 
