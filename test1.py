@@ -53,13 +53,17 @@ def preprocess_text(text):
     return cleaned_text
 
 # Load your pre-trained model (model1)
-models = joblib.load("tolonglah.pkl")
+model1 = joblib.load("tolonglah.pkl")
 
-# Use the specific model from the dictionary
-model1 = models['model1']
+# Load your CSV data into a DataFrame
+data = pd.read_csv('Tweets.csv', encoding='latin1')
 
-# Create a new TF-IDF vectorizer with max_features=10000
+# Preprocess the text in the DataFrame
+data['cleaned_text'] = data['text'].apply(preprocess_text)
+
+# Create a TF-IDF vectorizer and fit it on your training data
 tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
+tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_text'])
 
 # Create a Streamlit app
 st.title("Text Classification App")
@@ -73,7 +77,7 @@ if st.button("Make Prediction"):
         # Preprocess the user input
         preprocessed_input = preprocess_text(user_input)
 
-        # Transform the preprocessed input
+        # Transform the preprocessed input using the same TF-IDF vectorizer
         tfidf_input = tfidf_vectorizer.transform([preprocessed_input])
 
         # Make predictions using model1
