@@ -1,17 +1,11 @@
 import streamlit as st
 import joblib
 import re
-import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import nltk
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.model_selection import StratifiedKFold
-from sklearn.naive_bayes import BernoulliNB
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-from scipy.sparse import hstack
-from hyperopt import fmin, tpe, hp
-import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd
 
 # Download NLTK stopwords
 nltk.download('stopwords')
@@ -61,6 +55,16 @@ def preprocess_text(text):
 # Load your pre-trained model (model1)
 model1 = joblib.load("tolonglah.pkl")
 
+# Load your CSV data into a DataFrame
+data = pd.read_csv('Tweets.csv')
+
+# Preprocess the text in the DataFrame
+data['cleaned_text'] = data['text'].apply(preprocess_text)
+
+# Create a TF-IDF vectorizer and fit it on your training data
+tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
+tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_text'])
+
 # Create a Streamlit app
 st.title("Text Classification App")
 
@@ -73,17 +77,11 @@ if st.button("Make Prediction"):
         # Preprocess the user input
         preprocessed_input = preprocess_text(user_input)
 
-        # Create a new TF-IDF vectorizer
-        tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
-
-        # Fit the vectorizer with your data (you need a corpus of documents to fit it)
-        # tfidf_vectorizer.fit(your_corpus)  # Uncomment and replace 'your_corpus' with your actual data
-
         # Transform the preprocessed input
-        tfidf_features = tfidf_vectorizer.transform([preprocessed_input])
+        tfidf_input = tfidf_vectorizer.transform([preprocessed_input])
 
         # Make predictions using model1
-        prediction = model1.predict(tfidf_features)[0]
+        prediction = model1.predict(tfidf_input)[0]
 
         # Display the prediction result
         st.write(f"Prediction: {prediction}")
