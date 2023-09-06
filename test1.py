@@ -57,7 +57,8 @@ model1 = joblib.load("tolonglah.pkl")
 
 # Load your CSV data into a DataFrame
 data = pd.read_csv('Tweets.csv', encoding='latin1')
-data['cleaned_data'] =  preprocess_text(data['text'])
+# Apply preprocessing to the 'text' column using .apply()
+data['cleaned_data'] = data['text'].apply(preprocess_text)
 
 # Create a Streamlit app
 st.title("Text Classification App")
