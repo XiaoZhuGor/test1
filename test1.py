@@ -58,16 +58,8 @@ models = joblib.load("tolonglah.pkl")
 # Use the specific model from the dictionary
 model1 = models['model1']
 
-# Load your CSV data into a DataFrame
-data = pd.read_csv('Tweets.csv', encoding='latin1')
-
-
-# Preprocess the text in the DataFrame
-data['cleaned_text'] = data['text'].apply(preprocess_text)
-
-# Create a TF-IDF vectorizer and fit it on your training data
+# Create a new TF-IDF vectorizer with max_features=10000
 tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
-tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_text'])
 
 # Create a Streamlit app
 st.title("Text Classification App")
