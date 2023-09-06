@@ -1,6 +1,8 @@
+
 import streamlit as st
 import joblib
-import numpy as np  # Add this import
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
 
 # Create a file uploader to allow users to upload the model file
 model_file = st.file_uploader("Upload model file (.pkl)", type=["pkl"])
@@ -19,14 +21,17 @@ if model_file:
     # Create an input field for user input
     user_input = st.text_input("Enter some text:", "")
 
+    # Load the vectorizer used during training (replace 'vectorizer' with your actual vectorizer)
+    vectorizer = joblib.load("your_vectorizer.pkl")  # Replace with the path to your vectorizer
+
     # Function to make predictions using the selected model
     def make_prediction(input_text, selected_model):
         model = loaded_models[selected_model]
 
-        # Reshape the input data into a 2D array
-        input_text = np.array(input_text).reshape(-1, 1)
+        # Vectorize the input text using the same vectorizer used during training
+        input_features = vectorizer.transform([input_text])
 
-        prediction = model.predict(input_text)[0]
+        prediction = model.predict(input_features)[0]
         return prediction
 
     # Make predictions when the user clicks a button
