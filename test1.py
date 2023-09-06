@@ -57,6 +57,7 @@ model1 = joblib.load("tolonglah.pkl")
 
 # Load your CSV data into a DataFrame
 data = pd.read_csv('Tweets.csv', encoding='latin1')
+data['cleaned_data'] =  preprocess_text(data['text'])
 
 # Create a Streamlit app
 st.title("Text Classification App")
@@ -67,17 +68,17 @@ user_input = st.text_area("Enter some text:", "")
 
 # Recreate the TF-IDF vectorizer with the same parameters used during training
 tfidf_vectorizer = TfidfVectorizer(max_features=20032, ngram_range=(1, 2))
-tfidf_features = tfidf_vectorizer.fit_transform(data['text'])
+tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 
 # Recreate the BoW vectorizer with the same parameters used during training
 bow_vectorizer = CountVectorizer(max_features=20032, ngram_range=(1, 2))
-bow_features = bow_vectorizer.fit_transform(data['text'])
+bow_features = bow_vectorizer.fit_transform(data['cleaned_data'])
 
 # Create a button to make predictions
 if st.button("Make Prediction"):
     if user_input:
         # Preprocess the user input
-        preprocessed_input = user_input
+        preprocessed_input = preprocess_text(user_input)
 
         # Transform the preprocessed input using the same TF-IDF vectorizer
         tfidf_input = tfidf_vectorizer.transform([preprocessed_input])
