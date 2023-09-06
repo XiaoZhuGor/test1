@@ -4,7 +4,7 @@ import re
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import nltk
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import pandas as pd
 
 # Download NLTK stopwords
@@ -68,6 +68,10 @@ user_input = st.text_area("Enter some text:", "")
 tfidf_vectorizer = TfidfVectorizer(max_features=20032, ngram_range=(1, 2))
 tfidf_features = tfidf_vectorizer.fit_transform(data['text'])
 
+# Recreate the BoW vectorizer with the same parameters used during training
+bow_vectorizer = CountVectorizer(max_features=20032, ngram_range=(1, 2))
+bow_features = bow_vectorizer.fit_transform(data['text'])
+
 # Create a button to make predictions
 if st.button("Make Prediction"):
     if user_input:
@@ -77,8 +81,14 @@ if st.button("Make Prediction"):
         # Transform the preprocessed input using the same TF-IDF vectorizer
         tfidf_input = tfidf_vectorizer.transform([preprocessed_input])
 
+        # Transform the preprocessed input using the same BoW vectorizer
+        bow_input = bow_vectorizer.transform([preprocessed_input])
+
+        # Combine the TF-IDF and BoW features for prediction
+        combined_input = tfidf_input + bow_input
+
         # Make predictions using model1
-        prediction = model1.predict(tfidf_input)[0]
+        prediction = model1.predict(combined_input)[0]
 
         # Display the prediction result
         st.write(f"Prediction: {prediction}")
