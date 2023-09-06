@@ -21,8 +21,12 @@ if model_file:
     # Function to make predictions using the selected model
     def make_prediction(input_text, selected_model):
         model = loaded_models[selected_model]
+
+        # Preprocess the input text using the same vectorizer used during training
+        input_features = vectorizer.transform([input_text])  # Replace 'vectorizer' with your actual vectorizer
+
         # Replace this with your actual prediction code for the selected model
-        prediction = model.predict([input_text])[0]
+        prediction = model.predict(input_features)[0]
         return prediction
 
     # Make predictions when the user clicks a button
@@ -31,4 +35,5 @@ if model_file:
             prediction = make_prediction(user_input, selected_model)
             st.write(f"Prediction using {selected_model}: {prediction}")
 
-# Note: You should replace the prediction logic with your specific model's prediction code.
+# Note: You should replace 'vectorizer' with the actual vectorizer used during training.
+# You may also need to preprocess the input text further to match the preprocessing done during training.
