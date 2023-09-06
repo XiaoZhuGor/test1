@@ -5,13 +5,18 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import nltk
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+from sklearn.model_selection import StratifiedKFold
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from scipy.sparse import hstack
+from hyperopt import fmin, tpe, hp
 import numpy as np
 
-# Load your pre-trained model (model1)
-model1 = joblib.load("tolonglah.pkl")
+# Download NLTK stopwords
+nltk.download('stopwords')
 
-# Define the text preprocessing function
+# Create a function to preprocess text
 def preprocess_text(text):
     # Convert text to lowercase
     text = text.lower()
@@ -53,28 +58,32 @@ def preprocess_text(text):
 
     return cleaned_text
 
+# Load your pre-trained model (model1)
+model1 = joblib.load("tolonglah.pkl")
+
 # Create a Streamlit app
 st.title("Text Classification App")
-st.write("Enter some text and I'll predict the class.")
 
-# Create a text input field for user input
+# Create a text input field
 user_input = st.text_area("Enter some text:", "")
 
-# Preprocess the user input and make predictions
-if user_input:
-    preprocessed_input = preprocess_text(user_input)
+# Create a button to make predictions
+if st.button("Make Prediction"):
+    if user_input:
+        # Preprocess the user input
+        preprocessed_input = preprocess_text(user_input)
 
-    # Create a new TfidfVectorizer
-    tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
-    
-    # Fit the vectorizer with your data (you need a corpus of documents to fit it)
-    # tfidf_vectorizer.fit(your_corpus)  # Uncomment and replace 'your_corpus' with your actual data
+        # Create a new TF-IDF vectorizer
+        tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
 
-    # Transform the preprocessed input
-    tfidf_features = tfidf_vectorizer.transform([preprocessed_input])
+        # Fit the vectorizer with your data (you need a corpus of documents to fit it)
+        # tfidf_vectorizer.fit(your_corpus)  # Uncomment and replace 'your_corpus' with your actual data
 
-    # Make predictions using model1
-    prediction = model1.predict(tfidf_features)[0]
+        # Transform the preprocessed input
+        tfidf_features = tfidf_vectorizer.transform([preprocessed_input])
 
-    # Display the prediction result
-    st.write(f"Prediction: {prediction}")
+        # Make predictions using model1
+        prediction = model1.predict(tfidf_features)[0]
+
+        # Display the prediction result
+        st.write(f"Prediction: {prediction}")
