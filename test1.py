@@ -5,12 +5,9 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import nltk
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from scipy.sparse import hstack
+from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 
-# Download the NLTK stopwords resource (only need to do this once)
-nltk.download('stopwords')
 # Load your pre-trained model (model1)
 model1 = joblib.load("tolonglah.pkl")
 
@@ -56,26 +53,28 @@ def preprocess_text(text):
 
     return cleaned_text
 
-# Create a file uploader to allow users to upload text data
+# Create a Streamlit app
+st.title("Text Classification App")
+st.write("Enter some text and I'll predict the class.")
+
+# Create a text input field for user input
 user_input = st.text_area("Enter some text:", "")
 
-# Preprocess the user input
+# Preprocess the user input and make predictions
 if user_input:
     preprocessed_input = preprocess_text(user_input)
 
-    # Vectorize the preprocessed input using TF-IDF and BoW
+    # Create a new TfidfVectorizer
     tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
-    bow_vectorizer = CountVectorizer(max_features=10000, ngram_range=(1, 2))
     
+    # Fit the vectorizer with your data (you need a corpus of documents to fit it)
+    # tfidf_vectorizer.fit(your_corpus)  # Uncomment and replace 'your_corpus' with your actual data
+
     # Transform the preprocessed input
     tfidf_features = tfidf_vectorizer.transform([preprocessed_input])
-    bow_features = bow_vectorizer.transform([preprocessed_input])
-
-    # Combine TF-IDF and BoW features
-    combined_features = hstack([tfidf_features, bow_features])
 
     # Make predictions using model1
-    prediction = model1.predict(combined_features)[0]
+    prediction = model1.predict(tfidf_features)[0]
 
     # Display the prediction result
     st.write(f"Prediction: {prediction}")
