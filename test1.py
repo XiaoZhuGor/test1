@@ -65,7 +65,7 @@ st.title("Text Classification App")
 user_input = st.text_area("Enter some text:", "")
 
 # Recreate the TF-IDF vectorizer with the same parameters used during training
-tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
+tfidf_vectorizer = TfidfVectorizer(max_features=21000, ngram_range=(1, 2))
 tfidf_features = tfidf_vectorizer.fit_transform(data['text'])
 
 # Create a button to make predictions
