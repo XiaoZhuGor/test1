@@ -58,6 +58,15 @@ model1 = joblib.load("tolonglah.pkl")
 # Load your CSV data into a DataFrame
 data = pd.read_csv('Tweets.csv', encoding='latin1')
 
+# Filter the data to remove neutral reviews
+data = data[data['airline_sentiment'] != 'neutral']
+
+# Limit the negative reviews to 6000
+negative_reviews = data[data['airline_sentiment'] == 'negative'][:3000]
+
+# Concatenate the filtered negative reviews with the non-negative reviews
+data = pd.concat([data[data['airline_sentiment'] != 'negative'], negative_reviews])
+
 # Create a Streamlit app
 st.title("Text Classification App")
 
