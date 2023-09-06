@@ -56,7 +56,8 @@ def preprocess_text(text):
 model1 = joblib.load("tolonglah.pkl")
 
 # Load your CSV data into a DataFrame
-data = pd.read_csv('Tweets.csv')
+data = pd.read_csv('Tweets.csv', encoding='latin1')
+
 
 # Preprocess the text in the DataFrame
 data['cleaned_text'] = data['text'].apply(preprocess_text)
