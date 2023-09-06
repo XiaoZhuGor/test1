@@ -58,6 +58,8 @@ model1 = joblib.load("tolonglah.pkl")
 # Load your CSV data into a DataFrame
 data = pd.read_csv('Tweets.csv', encoding='latin1')
 
+# Filter the data to remove neutral reviews
+data = data[data['airline_sentiment'] != 'neutral']
 
 # Create a Streamlit app
 st.title("Text Classification App")
