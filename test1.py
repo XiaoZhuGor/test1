@@ -1,5 +1,6 @@
 import streamlit as st
 import joblib
+import numpy as np  # Added this import
 
 # Create a file uploader to allow users to upload the model file
 model_file = st.file_uploader("Upload model file (.pkl)", type=["pkl"])
@@ -23,7 +24,13 @@ if model_file:
         model = loaded_models[selected_model]
 
         # Preprocess the input text using the same vectorizer used during training
-        input_features = vectorizer.transform([input_text])  # Replace 'vectorizer' with your actual vectorizer
+        # Replace 'vectorizer' with your actual vectorizer
+        # Example: vectorizer = your_actual_vectorizer
+        input_features = vectorizer.transform([input_text])
+
+        # Convert input_features to a NumPy array and reshape it
+        input_features = np.array(input_features)
+        input_features = input_features.reshape(1, -1)
 
         # Replace this with your actual prediction code for the selected model
         prediction = model.predict(input_features)[0]
