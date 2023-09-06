@@ -21,7 +21,11 @@ if model_file:
     # Function to make predictions using the selected model
     def make_prediction(input_text, selected_model):
         model = loaded_models[selected_model]
-        prediction = model.predict([input_text])[0]
+        
+        # Reshape the input as a 2D array
+        input_text = [input_text]
+        
+        prediction = model.predict(input_text)[0]
         return prediction
 
     # Make predictions when the user clicks a button
