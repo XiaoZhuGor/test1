@@ -1,6 +1,5 @@
 import streamlit as st
 import joblib
-import numpy as np
 
 # Create a file uploader to allow users to upload the model file
 model_file = st.file_uploader("Upload model file (.pkl)", type=["pkl"])
@@ -23,8 +22,8 @@ if model_file:
     def make_prediction(input_text, selected_model):
         model = loaded_models[selected_model]
 
-        # Convert input_text into a 2D array
-        input_text = np.array([input_text])
+        # Reshape the input data into a 2D array
+        input_text = np.array(input_text).reshape(-1, 1)
 
         prediction = model.predict(input_text)[0]
         return prediction
