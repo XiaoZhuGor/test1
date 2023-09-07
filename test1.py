@@ -90,6 +90,9 @@ if st.button("Make Prediction"):
 
         # Make predictions using model1
         prediction = model1.predict(combined_input)
-
+        
+        # Display the preprocessed input text
+        st.write(f"Preprocessed text: {preprocessed_input}")
+        
         # Display the prediction result
         st.write(f"Prediction: {prediction[0]}")
