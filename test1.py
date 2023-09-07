@@ -5,10 +5,8 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+from scipy.sparse import hstack
 import pandas as pd
-
-# Download NLTK stopwords
-nltk.download('stopwords')
 
 # Create a function to preprocess text
 def preprocess_text(text):
@@ -81,12 +79,13 @@ if st.button("Make Prediction"):
         preprocessed_input = preprocess_text(user_input)
 
         # Transform the preprocessed input using the same TF-IDF vectorizer
-        tfidf_input = tfidf_features.transform([preprocessed_input])
+        tfidf_input = tfidf_vectorizer.transform([preprocessed_input])
 
         # Transform the preprocessed input using the same BoW vectorizer
-        bow_input = bow_features.transform([preprocessed_input])
+        bow_input = bow_vectorizer.transform([preprocessed_input])
 
-        # Combine the TF-IDF and BoW features for prediction
+        # Combine the TF-IDF and BoW features (if needed)
+        # Example of concatenation (modify as needed):
         combined_input = hstack([tfidf_input, bow_input])
 
         # Make predictions using model1
