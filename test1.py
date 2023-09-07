@@ -6,6 +6,7 @@ from nltk.stem import PorterStemmer
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import pandas as pd
+import numpy as np
 
 # Download NLTK stopwords
 nltk.download('stopwords')
