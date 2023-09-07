@@ -60,6 +60,8 @@ model1 = joblib.load("tolonglah.pkl")  # Replace with your model file path
 # Load your CSV data into a DataFrame
 data = pd.read_csv('Tweets.csv', encoding='latin1')
 
+data = data[data['airline_sentiment'] != 'neutral']
+
 # Apply preprocessing to the 'text' column using .apply()
 data['cleaned_data'] = data['text'].apply(preprocess_text)
 
