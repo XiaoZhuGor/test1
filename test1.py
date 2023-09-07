@@ -63,5 +63,8 @@ if st.button("Make Prediction"):
         # Make predictions using model1
         prediction = model1.predict([preprocessed_input])  # Pass a list containing the input
 
+        # Reshape the prediction to 1D array
+        prediction = prediction.reshape(-1)
+
         # Display the prediction result
         st.write(f"Prediction: {prediction[0]}")  # Access the first (and only) prediction in the list
