@@ -66,11 +66,11 @@ user_input = st.text_area("Enter some text:", "")
 
 
 # Recreate the TF-IDF vectorizer with the same parameters used during training
-tfidf_vectorizer = TfidfVectorizer(max_features=40064, ngram_range=(1, 2))
+tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
 tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 
 # Recreate the BoW vectorizer with the same parameters used during training
-bow_vectorizer = CountVectorizer(max_features=40064, ngram_range=(1, 2))
+bow_vectorizer = CountVectorizer(max_features=10000, ngram_range=(1, 2))
 bow_features = bow_vectorizer.fit_transform(data['cleaned_data'])
 
 if st.button("Make Prediction"):
