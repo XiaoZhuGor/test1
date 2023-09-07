@@ -22,8 +22,8 @@ user_input = st.text_area("Enter some text:", "")
 # Create a button to make predictions
 if st.button("Make Prediction"):
     if user_input:
-         # Reshape the input to meet the model's expectations (assuming it expects a single sample)
-        user_input_reshaped = [user_input]
+         # Reshape the input data into a 2D array
+        user_input_reshaped = np.array([user_input])
 
         # Make predictions using model1
         prediction = model1.predict(user_input_reshaped)
