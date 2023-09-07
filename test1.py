@@ -1,10 +1,11 @@
 import streamlit as st
 import joblib
 import re
+import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
-import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+from scipy.sparse import hstack
 import pandas as pd
 
 # Download NLTK stopwords
@@ -53,32 +54,32 @@ def preprocess_text(text):
     return cleaned_text
 
 # Load your pre-trained model (model1)
-model1 = joblib.load("tolonglah.pkl")
+model1 = joblib.load("tolonglah.pkl")  # Replace with your model file path
 
 # Load your CSV data into a DataFrame
 data = pd.read_csv('Tweets.csv', encoding='latin1')
+
 # Apply preprocessing to the 'text' column using .apply()
 data['cleaned_data'] = data['text'].apply(preprocess_text)
 
 # Create a Streamlit app
-st.title("deployment test")
+st.title("Deployment Test")
 
 # Create a text input field
 user_input = st.text_area("Enter some text:", "")
 
-
 # Recreate the TF-IDF vectorizer with the same parameters used during training
-tfidf_vectorizer = TfidfVectorizer(max_features=10016, ngram_range=(1, 2))
+tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
 tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 
 # Recreate the BoW vectorizer with the same parameters used during training
-bow_vectorizer = CountVectorizer(max_features=10016, ngram_range=(1, 2))
+bow_vectorizer = CountVectorizer(max_features=10000, ngram_range=(1, 2))
 bow_features = bow_vectorizer.fit_transform(data['cleaned_data'])
 
 # Create a button to make predictions
 if st.button("Make Prediction"):
     if user_input:
-        # Preprocess the user input
+        # Preprocess the user input for TF-IDF and BoW features
         preprocessed_input = preprocess_text(user_input)
 
         # Transform the preprocessed input using the same TF-IDF vectorizer
@@ -87,11 +88,23 @@ if st.button("Make Prediction"):
         # Transform the preprocessed input using the same BoW vectorizer
         bow_input = bow_vectorizer.transform([preprocessed_input])
 
-        # Combine the TF-IDF and BoW features for prediction
+        # Combine the TF-IDF and BoW features
         combined_input = tfidf_input + bow_input
 
+        # Process the user input for POS features
+        tokens = nltk.word_tokenize(user_input)
+        pos_tags = nltk.pos_tag(tokens)
+        pos_tags_str = ' '.join([tag for _, tag in pos_tags])
+
+        # Create a POS vectorizer
+        pos_vectorizer = CountVectorizer()
+        pos_input = pos_vectorizer.transform([pos_tags_str])
+
+        # Combine the TF-IDF, BoW, and POS features for prediction
+        all_features_input = hstack([combined_input, pos_input])
+
         # Make predictions using model1
-        prediction = model1.predict(combined_input)
+        prediction = model1.predict(all_features_input)
 
         # Display the prediction result
         st.write(f"Prediction: {prediction}")
