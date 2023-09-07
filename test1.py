@@ -11,6 +11,7 @@ import pandas as pd
 # Download NLTK stopwords
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
 
 # Create a function to preprocess text
 def preprocess_text(text):
