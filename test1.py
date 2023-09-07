@@ -63,12 +63,6 @@ data = pd.read_csv('Tweets.csv', encoding='latin1')
 # Apply preprocessing to the 'text' column using .apply()
 data['cleaned_data'] = data['text'].apply(preprocess_text)
 
-# Create a Streamlit app
-st.title("Deployment Test")
-
-# Create a text input field
-user_input = st.text_area("Enter some text:", "")
-
 # Recreate the TF-IDF vectorizer with the same parameters used during training
 tfidf_vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2))
 tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
@@ -76,6 +70,15 @@ tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 # Recreate the BoW vectorizer with the same parameters used during training
 bow_vectorizer = CountVectorizer(max_features=10000, ngram_range=(1, 2))
 bow_features = bow_vectorizer.fit_transform(data['cleaned_data'])
+
+# Create a Streamlit app
+st.title("Deployment Test")
+
+# Create a text input field
+user_input = st.text_area("Enter some text:", "")
+
+# Create a POS vectorizer
+pos_vectorizer = CountVectorizer()  # Moved this line here
 
 # Create a button to make predictions
 if st.button("Make Prediction"):
@@ -97,8 +100,7 @@ if st.button("Make Prediction"):
         pos_tags = nltk.pos_tag(tokens)
         pos_tags_str = ' '.join([tag for _, tag in pos_tags])
 
-        # Create a POS vectorizer
-        pos_vectorizer = CountVectorizer()  # Moved this line here
+        # Transform the preprocessed input using the POS vectorizer
         pos_input = pos_vectorizer.transform([pos_tags_str])
 
         # Combine the TF-IDF, BoW, and POS features for prediction
