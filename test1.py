@@ -8,10 +8,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from scipy.sparse import hstack
 import pandas as pd
 
-# Download NLTK stopwords
+# Download NLTK stopwords and tokenizer data
 nltk.download('punkt')
 nltk.download('stopwords')
-nltk.download('averaged_perceptron_tagger')
 
 # Create a function to preprocess text
 def preprocess_text(text):
@@ -99,7 +98,7 @@ if st.button("Make Prediction"):
         pos_tags_str = ' '.join([tag for _, tag in pos_tags])
 
         # Create a POS vectorizer
-        pos_vectorizer = CountVectorizer()
+        pos_vectorizer = CountVectorizer()  # Moved this line here
         pos_input = pos_vectorizer.transform([pos_tags_str])
 
         # Combine the TF-IDF, BoW, and POS features for prediction
