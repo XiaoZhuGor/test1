@@ -65,7 +65,7 @@ if st.button("Make Prediction"):
         preprocessed_input = preprocess_text(user_input)
 
         # Make predictions using model1
-        prediction = model1.predict(preprocessed_input.reshape(1, -1))
+        prediction = model1.predict(preprocessed_input)
 
         # Display the prediction result
         st.write(f"Prediction: {prediction}")
