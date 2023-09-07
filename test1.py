@@ -68,29 +68,30 @@ user_input = st.text_area("Enter some text:", "")
 
 
 # Recreate the TF-IDF vectorizer with the same parameters used during training
-tfidf_vectorizer = TfidfVectorizer(max_features=20032, ngram_range=(1, 2))
+tfidf_vectorizer = TfidfVectorizer(max_features=10016, ngram_range=(1, 2))
 tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 
 # Recreate the BoW vectorizer with the same parameters used during training
-bow_vectorizer = CountVectorizer(max_features=20032, ngram_range=(1, 2))
+bow_vectorizer = CountVectorizer(max_features=10016, ngram_range=(1, 2))
 bow_features = bow_vectorizer.fit_transform(data['cleaned_data'])
 
+# Create a button to make predictions
 if st.button("Make Prediction"):
     if user_input:
         # Preprocess the user input
         preprocessed_input = preprocess_text(user_input)
 
         # Transform the preprocessed input using the same TF-IDF vectorizer
-        tfidf_input = tfidf_features.transform([preprocessed_input])
+        tfidf_input = tfidf_vectorizer.transform([preprocessed_input])
 
         # Transform the preprocessed input using the same BoW vectorizer
-        bow_input = bow_features.transform([preprocessed_input])
+        bow_input = bow_vectorizer.transform([preprocessed_input])
 
         # Combine the TF-IDF and BoW features for prediction
-        combined_input = hstack([tfidf_input, bow_input])
+        combined_input = tfidf_input + bow_input
 
         # Make predictions using model1
-        prediction = model1.predict(combined_input)
+        prediction = model1.predict(preprocessed_input.reshape(1, -1))
 
         # Display the prediction result
-        st.write(f"Prediction: {prediction[0]}")
+        st.write(f"Prediction: {prediction}")
