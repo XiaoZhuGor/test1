@@ -61,7 +61,7 @@ data = pd.read_csv('Tweets.csv', encoding='latin1')
 data['cleaned_data'] = data['text'].apply(preprocess_text)
 
 # Create a Streamlit app
-st.title("Text Classification App")
+st.title("deployment test")
 
 # Create a text input field
 user_input = st.text_area("Enter some text:", "")
