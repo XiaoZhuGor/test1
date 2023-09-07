@@ -29,10 +29,6 @@ def preprocess_text(text):
     for sentence in sentences:
         words = sentence.split()
 
-        # Remove the first word in the sentence
-        #if len(words) > 1:
-        #    words = words[1:]
-
         # Remove stopwords and apply stemming
         words = [word for word in words if word not in stop_words]
 
@@ -65,7 +61,7 @@ if st.button("Make Prediction"):
         preprocessed_input = preprocess_text(user_input)
 
         # Make predictions using model1
-        prediction = model1.predict(preprocessed_input)
+        prediction = model1.predict([preprocessed_input])  # Pass a list containing the input
 
         # Display the prediction result
-        st.write(f"Prediction: {prediction}")
+        st.write(f"Prediction: {prediction[0]}")  # Access the first (and only) prediction in the list
