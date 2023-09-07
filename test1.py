@@ -9,6 +9,7 @@ from scipy.sparse import hstack
 import pandas as pd
 
 # Download NLTK stopwords
+nltk.download('punkt')
 nltk.download('stopwords')
 
 # Create a function to preprocess text
