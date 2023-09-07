@@ -23,11 +23,14 @@ user_input = st.text_area("Enter some text:", "")
 # Create a button to make predictions
 if st.button("Make Prediction"):
     if user_input:
-         # Reshape the input data into a 2D array
-        user_input_reshaped = np.array([user_input])
+         # Initialize the CountVectorizer
+        vectorizer = CountVectorizer(binary=True)
+
+        # Fit the vectorizer on the training data and transform user input
+        user_input_transformed = vectorizer.transform([user_input])
 
         # Make predictions using model1
-        prediction = model1.predict(user_input_reshaped)
+        prediction = model1.predict(user_input_transformed)
 
         # Display the prediction result
         st.write(f"Prediction: {prediction[0]}")
