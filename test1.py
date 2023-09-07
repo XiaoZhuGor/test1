@@ -91,7 +91,7 @@ if st.button("Make Prediction"):
         combined_input = tfidf_input + bow_input
 
         # Make predictions using model1
-        prediction = model1.predict(preprocessed_input.reshape(1, -1))
+        prediction = model1.predict(combined_input)
 
         # Display the prediction result
         st.write(f"Prediction: {prediction}")
