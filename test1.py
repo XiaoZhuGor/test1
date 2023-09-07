@@ -26,4 +26,4 @@ if st.button("Make Prediction"):
         prediction = model1.predict(user_input)
 
         # Display the prediction result
-        st.write(f"Prediction: {prediction}")
+        st.write(f"Prediction: {prediction[0]}")
