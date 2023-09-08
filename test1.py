@@ -111,5 +111,8 @@ if st.button("Make Prediction"):
         # Make predictions using model1
         prediction = model1.predict(all_features_input)
 
+        # Display the preprocessed input
+        st.write(f"Preprocessed text: {preprocessed_input}")
+
         # Display the prediction result
         st.write(f"Prediction: {prediction}")
