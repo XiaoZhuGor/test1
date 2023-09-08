@@ -8,10 +8,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from scipy.sparse import hstack
 import pandas as pd
 
-# Download NLTK stopwords and tokenizer data
-nltk.download('punkt')
-nltk.download('stopwords')
-
 # Create a function to preprocess text
 def preprocess_text(text):
     # Convert text to lowercase
