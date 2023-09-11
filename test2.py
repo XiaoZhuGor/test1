@@ -6,7 +6,7 @@ import nltk
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
 
 
 
@@ -197,13 +197,14 @@ if uploaded_file:
     # Make predictions using the model
     predictions = model1.predict(tfidf_features)
     
-    # Create a histogram of prediction results
+     # Create a histogram of prediction results using Plotly
     prediction_counts = pd.Series(predictions).value_counts()
-    plt.figure(figsize=(8, 6))
-    plt.bar(prediction_counts.index, prediction_counts.values, tick_label=['Neutral', 'Positive', 'Negative'])
-    plt.xlabel("Sentiment")
-    plt.ylabel("Count")
-    plt.title("Sentiment Analysis Results")
-    plt.ylim(0, 1000)  # Set the Y-axis limit to 1000 per inch
-    st.pyplot(plt)
+    fig = px.bar(
+        x=['Neutral', 'Positive', 'Negative'],
+        y=prediction_counts.values,
+        labels={'x': 'Sentiment', 'y': 'Count'},
+        title="Sentiment Analysis Results"
+    )
+    fig.update_layout(yaxis=dict(range=[0, 1000]))  # Set the Y-axis limit to 1000 per inch
+    st.plotly_chart(fig)
 
