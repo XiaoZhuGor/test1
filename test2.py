@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from scipy.sparse import hstack
 import pandas as pd
 
+nltk.download('stopwords')
 # Define preprocessing functions
 def remove_stopwords(text):
     text = ' '.join([word for word in text.split() if word not in (stopwords.words('english'))])
