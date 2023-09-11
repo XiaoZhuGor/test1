@@ -4,4 +4,5 @@ pandas
 scikit-learn
 streamlit
 nltk
-hyperopt
+matplotlib
+
