@@ -120,8 +120,7 @@ st.title("Deployment Test")
 user_input = st.text_area("Enter some text:", "")
 
 
-# Recreate the TF-IDF vectorizer with the correct max_features value
-tfidf_vectorizer = TfidfVectorizer(max_features=len(tfidf_vectorizer.vocabulary_), ngram_range=(1, 3), max_df=0.5)
+tfidf_vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 3), max_df=0.5)
 tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 
 # Create a button to make predictions
