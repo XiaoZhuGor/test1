@@ -6,6 +6,8 @@ import nltk
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 
 # Define preprocessing functions
@@ -141,6 +143,13 @@ tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 tfidf_vectorizer2 = TfidfVectorizer(max_features=2500, ngram_range=(1, 3), max_df=0.25)
 tfidf_features2 = tfidf_vectorizer2.fit_transform(data['cleaned_data'])
 
+# Allow the user to upload a CSV file
+uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
+
+
+
+
+
 # Create a button to make predictions
 if st.button("Make Prediction"):
     if user_input:
@@ -174,3 +183,27 @@ if st.button("Make Prediction"):
 
             # Display the prediction result
             st.write(f"Prediction: {prediction}")
+
+if uploaded_file:
+    # Read the uploaded CSV file into a DataFrame
+    data = pd.read_csv(uploaded_file)
+
+    # Apply preprocessing to the 'text' column using .apply()
+    data['cleaned_data'] = data['text'].apply(preprocess_input_text)
+
+    # Fit and transform the TF-IDF vectorizer on the cleaned data
+    tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
+
+    # Make predictions using the model
+    predictions = model1.predict(tfidf_features)
+    
+    # Create a histogram of prediction results
+    prediction_counts = pd.Series(predictions).value_counts()
+    plt.figure(figsize=(8, 6))
+    plt.bar(prediction_counts.index, prediction_counts.values, tick_label=['Neutral', 'Positive', 'Negative'])
+    plt.xlabel("Sentiment")
+    plt.ylabel("Count")
+    plt.title("Sentiment Analysis Results")
+    plt.ylim(0, 1000)  # Set the Y-axis limit to 1000 per inch
+    st.pyplot(plt)
+
