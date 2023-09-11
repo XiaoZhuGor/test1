@@ -1,11 +1,10 @@
 import streamlit as st
 import joblib
+import string
 import re
 import nltk
 from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from scipy.sparse import hstack
 import pandas as pd
 
 
@@ -103,6 +102,18 @@ def preprocess_input_text(input_text):
 
 
 
+# Create a sidebar with two buttons
+st.sidebar.title("Sidebar Title")
+
+# Define button 1
+if st.sidebar.button("Button 1"):
+    # Code to run when Button 1 is clicked
+    st.write("Button 1 clicked!")
+
+# Define button 2
+if st.sidebar.button("Button 2"):
+    # Code to run when Button 2 is clicked
+    st.write("Button 2 clicked!")
 
 # Load your pre-trained model (model1)
 model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
