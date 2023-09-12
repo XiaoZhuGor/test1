@@ -1,3 +1,7 @@
+import matplotlib
+matplotlib.use('agg')  # Set the backend to 'agg'
+
+
 import streamlit as st
 import joblib
 import string
