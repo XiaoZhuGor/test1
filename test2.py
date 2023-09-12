@@ -203,10 +203,10 @@ if uploaded_file:
     data['cleaned_data'] = data['text'].apply(preprocess_input_text)
 
     # Fit and transform the TF-IDF vectorizer on the cleaned data
-    tfidf_features3 = tfidf_vectorizer.fit_transform(data['cleaned_data'])
+    tfidf_features3 = tfidf_vectorizer2.fit_transform(data['cleaned_data'])
 
     # Make predictions using the model
-    predictions = model1.predict(tfidf_features3)
+    predictions = model2.predict(tfidf_features3)
     
     prediction_counts = pd.Series(predictions).value_counts()
     plt.figure(figsize=(8, 6))
@@ -221,7 +221,7 @@ if uploaded_file:
     tfidf_scores = tfidf_features3.toarray()[0]
 
     # Get the feature names from the TF-IDF vectorizer
-    feature_names = tfidf_vectorizer.get_feature_names_out()
+    feature_names = tfidf_vectorizer2.get_feature_names_out()
 
     # Create a DataFrame to store the feature names and their TF-IDF scores
     tfidf_df = pd.DataFrame({'Feature': feature_names, 'TF-IDF Score': tfidf_scores})
