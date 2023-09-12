@@ -214,6 +214,6 @@ if uploaded_file:
     plt.xlabel("Sentiment")
     plt.ylabel("Count")
     plt.title("Sentiment Analysis Results")
-    plt.ylim(0, 1000)  # Set the Y-axis limit to 1000 per inch
+    plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
     st.pyplot(plt)
 
