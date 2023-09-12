@@ -217,3 +217,20 @@ if uploaded_file:
     plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
     st.pyplot(plt)
 
+    # Calculate the TF-IDF scores for the input
+    tfidf_scores = tfidf_features.toarray()[0]
+
+    # Get the feature names from the TF-IDF vectorizer
+    feature_names = tfidf_vectorizer.get_feature_names_out()
+
+    # Create a DataFrame to store the feature names and their TF-IDF scores
+    tfidf_df = pd.DataFrame({'Feature': feature_names, 'TF-IDF Score': tfidf_scores})
+
+    # Sort the DataFrame by TF-IDF Score in descending order
+    tfidf_df = tfidf_df.sort_values(by='TF-IDF Score', ascending=False)
+
+    # Display the top 10 most effective words based on TF-IDF
+    st.write("Top 10 Most Effective Words (TF-IDF):")
+    st.write(tfidf_df.head(10))
+
+
