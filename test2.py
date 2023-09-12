@@ -19,6 +19,8 @@ subprocess.check_call(["pip", "install", "matplotlib"])
 import matplotlib.pyplot as plt
 
 
+# Download the stopwords resource
+nltk.download('stopwords')
 
 # Define preprocessing functions
 def remove_stopwords(text):
