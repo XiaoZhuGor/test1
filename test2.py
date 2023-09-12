@@ -197,8 +197,7 @@ if st.button("Make Prediction"):
             st.write(f"Prediction: {prediction}")
 
 if uploaded_file:
-    # Read the uploaded CSV file into a DataFrame
-    data = pd.read_csv(uploaded_file)
+    data = pd.read_csv(uploaded_file, encoding='latin1')
 
     # Apply preprocessing to the 'text' column using .apply()
     data['cleaned_data'] = data['text'].apply(preprocess_input_text)
