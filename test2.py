@@ -155,13 +155,6 @@ tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 tfidf_vectorizer2 = TfidfVectorizer(max_features=2500, ngram_range=(1, 3), max_df=0.25)
 tfidf_features2 = tfidf_vectorizer2.fit_transform(data['cleaned_data'])
 
-# Allow the user to upload a CSV file
-uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
-
-
-
-
-
 # Create a button to make predictions
 if st.button("Make Prediction"):
     if user_input:
@@ -196,41 +189,6 @@ if st.button("Make Prediction"):
             # Display the prediction result
             st.write(f"Prediction: {prediction}")
 
-if uploaded_file:
-    data = pd.read_csv(uploaded_file, encoding='latin1')
 
-    # Apply preprocessing to the 'text' column using .apply()
-    data['cleaned_data'] = data['text'].apply(preprocess_input_text)
-
-    # Fit and transform the TF-IDF vectorizer on the cleaned data
-    tfidf_features3 = tfidf_vectorizer2.fit_transform(data['cleaned_data'])
-
-    # Make predictions using the model
-    predictions = model2.predict(tfidf_features3)
-    
-    prediction_counts = pd.Series(predictions).value_counts()
-    plt.figure(figsize=(8, 6))
-    plt.bar(prediction_counts.index, prediction_counts.values, tick_label=['Neutral', 'Positive', 'Negative'])
-    plt.xlabel("Sentiment")
-    plt.ylabel("Count")
-    plt.title("Sentiment Analysis Results")
-    plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
-    st.pyplot(plt)
-
-    # Calculate the TF-IDF scores for the input
-    tfidf_scores = tfidf_features3.toarray()[0]
-
-    # Get the feature names from the TF-IDF vectorizer
-    feature_names = tfidf_vectorizer2.get_feature_names_out()
-
-    # Create a DataFrame to store the feature names and their TF-IDF scores
-    tfidf_df = pd.DataFrame({'Feature': feature_names, 'TF-IDF Score': tfidf_scores})
-
-    # Sort the DataFrame by TF-IDF Score in descending order
-    tfidf_df = tfidf_df.sort_values(by='TF-IDF Score', ascending=False)
-
-    # Display the top 10 most effective words based on TF-IDF
-    st.write("Top 10 Most Effective Words (TF-IDF):")
-    st.write(tfidf_df.head(10))
 
 
