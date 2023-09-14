@@ -7,17 +7,10 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 import subprocess
-
-# ... (the rest of your imports and data preprocessing functions)
-#Install matplotlib if not already installed
-subprocess.check_call(["pip", "install", "matplotlib"])
-
-# Import matplotlib after installation
 import matplotlib.pyplot as plt
 
 
-# Download the stopwords resource
-nltk.download('stopwords')
+
 
 # Define preprocessing functions
 def remove_stopwords(text):
