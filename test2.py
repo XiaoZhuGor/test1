@@ -9,8 +9,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import pandas as pd
 import subprocess
 
-# Install matplotlib if not already installed
-subprocess.check_call(["pip", "install", "matplotlib"])
 
 # Import matplotlib after installation
 import matplotlib.pyplot as plt
