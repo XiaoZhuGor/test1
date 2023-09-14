@@ -9,7 +9,11 @@ import pandas as pd
 import subprocess
 import matplotlib.pyplot as plt
 
-
+try:
+    nltk.data.find('corpora/stopwords.zip')
+except LookupError:
+    # If the resource is not found, download it
+    nltk.download('stopwords')
 
 
 # Define preprocessing functions
