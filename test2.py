@@ -111,8 +111,19 @@ def preprocess_input_text(input_text):
     text = remove_stopwords(text)
     return text
 
+# Load your pre-trained model (model1)
+model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
 
+model2 = joblib.load("LinearSVC_smote.pkl")
 
+# Load your CSV data into a DataFrame
+data = pd.read_csv('Tweets.csv', encoding='latin1')
+
+# Apply preprocessing to the 'text' column using .apply()
+data['cleaned_data'] = data['text'].apply(preprocess_input_text)
+
+# Create a Streamlit app
+st.title("Deployment Test")
 
 # Create a Streamlit app
 st.title("Deployment Test")
@@ -122,6 +133,12 @@ user_input = st.text_area("Enter some text:", "")
 
 # Create a selectbox to allow the user to choose the model
 selected_model = st.selectbox("Select a Model", ["BernoulliNB", "LinearSVC"])
+
+tfidf_vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 3), max_df=0.5)
+tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
+
+tfidf_vectorizer2 = TfidfVectorizer(max_features=2500, ngram_range=(1, 3), max_df=0.25)
+tfidf_features2 = tfidf_vectorizer2.fit_transform(data['cleaned_data'])
 
 # Create a placeholder to display the prediction
 prediction_placeholder = st.empty()
