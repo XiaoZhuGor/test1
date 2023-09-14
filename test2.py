@@ -201,7 +201,7 @@ if uploaded_file:
     tfidf_features3 = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 
     # Make predictions using the model
-    predictions = model2.predict(tfidf_features3)
+    predictions = model1.predict(tfidf_features3)
     
     prediction_counts = pd.Series(predictions).value_counts()
     plt.figure(figsize=(8, 6))
