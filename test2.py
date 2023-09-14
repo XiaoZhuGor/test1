@@ -136,10 +136,10 @@ data = pd.read_csv('Tweets.csv', encoding='latin1')
 data['cleaned_data'] = data['text'].apply(preprocess_input_text)
 
 # Create a Streamlit app
-st.title("Deployment Test")
+st.title("Sentiment Analysis Test")
 
 # Create a text input field
-user_input = st.text_area("Enter some text:", "")
+user_input = st.text_area("Enter Text Prediction Here:", "")
 
 # Create a selectbox to allow the user to choose the model
 selected_model = st.selectbox("Select a Model", ["BernoulliNB", "LinearSVC"])
