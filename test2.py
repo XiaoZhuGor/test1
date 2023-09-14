@@ -116,18 +116,6 @@ def preprocess_input_text(input_text):
 
 
 
-# Create a sidebar with two buttons
-st.sidebar.title("Sidebar Title")
-
-# Define button 1
-if st.sidebar.button("Button 1"):
-    # Code to run when Button 1 is clicked
-    st.write("Button 1 clicked!")
-
-# Define button 2
-if st.sidebar.button("Button 2"):
-    # Code to run when Button 2 is clicked
-    st.write("Button 2 clicked!")
 
 # Load your pre-trained model (model1)
 model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
@@ -158,30 +146,24 @@ tfidf_features2 = tfidf_vectorizer2.fit_transform(data['cleaned_data'])
 # Create a button to make predictions
 if st.button("Make Prediction"):
     if user_input:
+        model_to_use = None  # Initialize model_to_use
         if selected_model == "BernoulliNB":
-            # Preprocess the user input for TF-IDF and BoW features
-            preprocessed_input = preprocess_input_text(user_input)
-
-            # Transform the preprocessed input using the same TF-IDF vectorizer
-            tfidf_input = tfidf_vectorizer.transform([preprocessed_input])
-
-            # Make predictions using model1
-            prediction = model1.predict(tfidf_input)
-
-            # Display the preprocessed input
-            st.write(f"Preprocessed text: {preprocessed_input}")
-
-            # Display the prediction result
-            st.write(f"Prediction: {prediction}")
+            model_to_use = model1
         else:
+            model_to_use = model2
+
+        if model_to_use is not None:
             # Preprocess the user input for TF-IDF and BoW features
             preprocessed_input = preprocess_input_text(user_input)
 
-            # Transform the preprocessed input using the same TF-IDF vectorizer
-            tfidf_input = tfidf_vectorizer2.transform([preprocessed_input])
+            # Transform the preprocessed input using the corresponding TF-IDF vectorizer
+            if model_to_use == model1:
+                tfidf_input = tfidf_vectorizer.transform([preprocessed_input])
+            else:
+                tfidf_input = tfidf_vectorizer2.transform([preprocessed_input])
 
-            # Make predictions using model2
-            prediction = model2.predict(tfidf_input)
+            # Make predictions using the selected model
+            prediction = model_to_use.predict(tfidf_input)
 
             # Display the preprocessed input
             st.write(f"Preprocessed text: {preprocessed_input}")
