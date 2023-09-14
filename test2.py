@@ -174,13 +174,13 @@ if st.button("Make Prediction"):
             # Display the prediction result
             st.write(f"Prediction: {prediction}")
         else:
-               # Preprocess the user input for TF-IDF and BoW features
+            # Preprocess the user input for TF-IDF and BoW features
             preprocessed_input = preprocess_input_text(user_input)
 
             # Transform the preprocessed input using the same TF-IDF vectorizer
             tfidf_input = tfidf_vectorizer2.transform([preprocessed_input])
 
-            # Make predictions using model1
+            # Make predictions using model2
             prediction = model2.predict(tfidf_input)
 
             # Display the preprocessed input
@@ -188,7 +188,3 @@ if st.button("Make Prediction"):
 
             # Display the prediction result
             st.write(f"Prediction: {prediction}")
-
-
-
-
