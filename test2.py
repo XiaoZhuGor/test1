@@ -11,10 +11,14 @@ import subprocess
 # Import matplotlib after installation
 import matplotlib.pyplot as plt
 
-# Download the stopwords resource
-nltk.download('stopwords')
+# Check if NLTK stopwords are already downloaded
+try:
+    # Attempt to find the stopwords dataset
+    nltk.data.find('corpora/stopwords.zip')
+except LookupError:
+    # If not found, download the stopwords dataset
+    nltk.download('stopwords')
 
-# Define preprocessing functions (same as before)
 # Define preprocessing functions
 def remove_stopwords(text):
     text = ' '.join([word for word in text.split() if word not in (stopwords.words('english'))])
@@ -111,13 +115,7 @@ def preprocess_input_text(input_text):
 model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
 model2 = joblib.load("LinearSVC_smote.pkl")
 tfidf_vectorizer2 = joblib.load("tfidf_vectorizer.pkl")
-
-
-# Load your CSV data into a DataFrame
-data = pd.read_csv('Tweets.csv', encoding='latin1')
-
-# Apply preprocessing to the 'text' column using .apply()
-data['cleaned_data'] = data['text'].apply(preprocess_input_text)
+tfidf_vectorizer = joblib.load("tfidf_vectorizerbnb.pkl.pkl")
 
 # Create a Streamlit app
 st.title("Sentiment Analysis Test")
@@ -132,9 +130,6 @@ with st.form("text_prediction_form"):
 
     # Create a button to make predictions
     prediction_button = st.form_submit_button("Make Prediction")
-
-tfidf_vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 3), max_df=0.5)
-tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 
 
 # Check if the form is submitted
