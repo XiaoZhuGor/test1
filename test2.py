@@ -149,15 +149,12 @@ if prediction_button:
 
             # Make predictions using model1
             prediction = model1.predict(tfidf_input)
-
-            # Map the predicted label to sentiment class
-            predicted_sentiment_label = sentiment_mapping.get(prediction[0], 'unknown')
-            
+        
             # Display the preprocessed input
             st.write(f"Preprocessed text: {preprocessed_input}")
 
             # Display the prediction result
-            st.write(f"Prediction: {predicted_sentiment_label}")
+            st.write(f"Prediction: {prediction}")
         else:
             # Preprocess the user input for TF-IDF and BoW features
             preprocessed_input = preprocess_input_text(user_input)
@@ -175,4 +172,4 @@ if prediction_button:
             st.write(f"Preprocessed text: {preprocessed_input}")
 
             # Display the prediction result
-            st.write(f"Prediction: {predicted_sentiment_label}")
+            st.write(f"Prediction: {prediction}")
