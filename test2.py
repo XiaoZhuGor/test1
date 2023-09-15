@@ -115,7 +115,7 @@ def preprocess_input_text(input_text):
 model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
 model2 = joblib.load("LinearSVC_smote.pkl")
 tfidf_vectorizer2 = joblib.load("tfidf_vectorizer.pkl")
-tfidf_vectorizer = joblib.load("tfidf_vectorizerbnb.pkl.pkl")
+tfidf_vectorizer = joblib.load("tfidf_vectorizerbnb.pkl")
 
 # Create a Streamlit app
 st.title("Sentiment Analysis Test")
