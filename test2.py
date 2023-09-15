@@ -131,6 +131,12 @@ with st.form("text_prediction_form"):
     # Create a button to make predictions
     prediction_button = st.form_submit_button("Make Prediction")
 
+tfidf_vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 3), max_df=0.5)
+tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
+
+tfidf_vectorizer2 = TfidfVectorizer(max_features=2500, ngram_range=(1, 3), max_df=0.25)
+tfidf_features2 = tfidf_vectorizer2.fit_transform(data['cleaned_data'])
+
 # Check if the form is submitted
 if prediction_button:
     if user_input:
