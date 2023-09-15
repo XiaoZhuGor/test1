@@ -150,6 +150,9 @@ if prediction_button:
             # Make predictions using model1
             prediction = model1.predict(tfidf_input)
 
+            # Map the predicted label to sentiment class
+            predicted_sentiment_label = sentiment_mapping.get(prediction[0], 'unknown')
+            
             # Display the preprocessed input
             st.write(f"Preprocessed text: {preprocessed_input}")
 
@@ -162,6 +165,9 @@ if prediction_button:
             # Transform the preprocessed input using the same TF-IDF vectorizer
             tfidf_input = tfidf_vectorizer2.transform([preprocessed_input])
 
+            # Map the predicted label to sentiment class
+            predicted_sentiment_label = sentiment_mapping.get(prediction[0], 'unknown')
+            
             # Make predictions using model2
             prediction = model2.predict(tfidf_input)
 
