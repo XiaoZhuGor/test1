@@ -118,6 +118,8 @@ tfidf_vectorizer = joblib.load("tfidf_vectorizerbnb.pkl")
 # Create a Streamlit app
 st.title("Sentiment Analysis Test")
 
+st.markdown("Created by 📈 by JD & AWIE ") 
+
 # Create a form to encapsulate the input fields
 with st.form("text_prediction_form"):
     # Create a selectbox to allow the user to choose the model
@@ -217,4 +219,4 @@ if prediction_button:
                 plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                 st.pyplot(plt)
 
-  st.markdown("Created by 📈 by JD & AWIE ")     
+    
