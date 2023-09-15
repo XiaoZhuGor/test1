@@ -217,5 +217,4 @@ if prediction_button:
                 plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                 st.pyplot(plt)
 
-  
-     
+  st.markdown("Created by 📈 by JD & AWIE ")     
