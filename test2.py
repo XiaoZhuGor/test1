@@ -110,6 +110,8 @@ def preprocess_input_text(input_text):
 # Load your pre-trained models (model1 and model2)
 model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
 model2 = joblib.load("LinearSVC_smote.pkl")
+tfidf_vectorizer2 = joblib.load("tfidf_vectorizer.pkl")
+
 
 # Load your CSV data into a DataFrame
 data = pd.read_csv('Tweets.csv', encoding='latin1')
@@ -134,8 +136,6 @@ with st.form("text_prediction_form"):
 tfidf_vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 3), max_df=0.5)
 tfidf_features = tfidf_vectorizer.fit_transform(data['cleaned_data'])
 
-tfidf_vectorizer2 = TfidfVectorizer(max_features=2500, ngram_range=(1, 3), max_df=0.25)
-tfidf_features2 = tfidf_vectorizer2.fit_transform(data['cleaned_data'])
 
 # Check if the form is submitted
 if prediction_button:
