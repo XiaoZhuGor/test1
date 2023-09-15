@@ -157,7 +157,7 @@ if prediction_button:
             st.write(f"Preprocessed text: {preprocessed_input}")
 
             # Display the prediction result
-            st.write(f"Prediction: {prediction}")
+            st.write(f"Prediction: {predicted_sentiment_label}")
         else:
             # Preprocess the user input for TF-IDF and BoW features
             preprocessed_input = preprocess_input_text(user_input)
@@ -175,4 +175,4 @@ if prediction_button:
             st.write(f"Preprocessed text: {preprocessed_input}")
 
             # Display the prediction result
-            st.write(f"Prediction: {prediction}")
+            st.write(f"Prediction: {predicted_sentiment_label}")
