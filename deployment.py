@@ -120,9 +120,9 @@ with MainTab:
     tfidf_vectorizer = joblib.load("tfidf_vectorizerbnb.pkl")
     
     # Create a Streamlit app
-    st.title("Sentiment Analysis Test")
+    st.title("Sentiment Analysis Application For Flight Reviews")
     
-    st.markdown("Created by 📈 by Ng Jia Jun JD") 
+    st.markdown("Created by 📈 Ng Jia Jun JD")
     
     # Create a form to encapsulate the input fields
     with st.form("text_prediction_form"):
@@ -223,4 +223,8 @@ with MainTab:
                     plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                     st.pyplot(plt)
 
+with InfoTab:
+    st.title("Sentiment Analysis on Airline Reviews: A Comparison Study on Machine Learning Models")
+    
+    st.markdown("by Ng Jia Jun JD")
     
