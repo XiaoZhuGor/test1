@@ -228,12 +228,7 @@ with InfoTab:
     
     st.markdown("by Ng Jia Jun JD")
 
-    table_data = [
-        ["Row 1, Col 1", "Row 1, Col 2"],
-        ["Row 2, Col 1", "Row 2, Col 2"],
-        ["Row 3, Col 1", "Row 3, Col 2"],
-    ]
+    st.header('Baseline performance of BernoulliNB and LinearSVC')
+    st.image('./baseline.jpg')
 
-    # Display the table
-    st.table(table_data)
     
