@@ -228,7 +228,13 @@ with InfoTab:
     
     st.markdown("by Ng Jia Jun JD")
 
-    st.header('Baseline performance of BernoulliNB and LinearSVC')
+    st.header('Baseline performance of BernoulliNB & LinearSVC')
     st.image('./baseline.jpg')
+
+    st.header('Baseline performance of BernoulliNB & LinearSVC + Hyperparameter Tuning using GridSearchCV')
+    st.image('./baseline tune.jpg')
+
+    st.header('Best BernoulliNB & LinearSVC performance + Oversampling with SMOTE')
+    st.image('./best model smote.jpg')
 
     
