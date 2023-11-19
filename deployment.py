@@ -122,7 +122,7 @@ with MainTab:
     # Create a Streamlit app
     st.title("Sentiment Analysis Test")
     
-    st.markdown("Created by 📈 by JD & AWIE ") 
+    st.markdown("Created by 📈 by Ng Jia Jun JD") 
     
     # Create a form to encapsulate the input fields
     with st.form("text_prediction_form"):
