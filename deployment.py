@@ -9,7 +9,7 @@ import pandas as pd
 import subprocess
 import matplotlib.pyplot as plt
 
-MainTab, EDA, preprocessing, testresults = st.tabs(["Main", "Explorative Data Analysis", "Preprocessing", "Testing & Results"])
+MainTab, EDA = st.tabs(["Main", "Explorative Data Analysis"])
 
 with MainTab:
 
@@ -278,9 +278,5 @@ with EDA:
 
     st.header('Best BernoulliNB & LinearSVC performance + Oversampling with SMOTE')
     st.image('./snapshots/best model smote.jpg')
-
-with preprocessing:
-
-with testresults:
 
     
