@@ -230,10 +230,40 @@ with InfoTab:
 
     st.header('Brief look at the dataset used (Tweets.csv)')
     st.image('./snapshots/tweets.jpg')
+
+    st.header('Dataset Information / Columns')
+    st.image('./snapshots/data info.jpg')
+
+    st.header('First and last tweet created')
+    st.image('./snapshots/firstlasttweetcreated.jpg')
+
+    st.header('Check for null values & Remove it')
+    st.image('./snapshots/nullvalues.jpg')
+
+    st.header('Distribution of Sentiments')
+    st.image('./snapshots/sentiment distribution.jpg')
+
+    st.header('Distribution of Airline types')
+    st.image('./snapshots/airline types distribution.jpg')
+
+    st.header('Distribution of sentiment for each Airline types')
+    st.image('./snapshots/sentiment for each airline distribution.jpg')
+
+    st.header('Overall distribution for negative reasons')
+    st.image('./snapshots/overall distribution for negative reasons.jpg')
+
+    st.header('Wordcloud for Positive Reasons')
+    st.image('./snapshots/positivewc.png')
+
+    st.header('Wordcloud for Neutral Reasons')
+    st.image('./snapshots/neutralwc.png')
+
+    st.header('Wordcloud for Negative Reasons')
+    st.image('./snapshots/negativewc.png')
     
     st.header('Baseline performance of BernoulliNB & LinearSVC')
     st.image('./snapshots/baseline.jpg')
-
+    
     st.header('Baseline performance of BernoulliNB & LinearSVC + Hyperparameter Tuning using GridSearchCV')
     st.image('./snapshots/baseline tune.jpg')
 
