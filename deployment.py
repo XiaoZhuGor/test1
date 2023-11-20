@@ -230,6 +230,7 @@ with InfoTab:
 
     st.header('Brief look at the dataset used (Tweets.csv)')
     st.image('./snapshots/tweets.jpg')
+    st.write('According to the owner (Crowdflower), the dataset used for this project was crawled during February of 2015 on Twitter (now known as X) and the dataset has a total of 14,640 sample data that contains customer’s opinion regarding the United States Airline that is divided into 3 sentiment classes such as positive, neutral and negative.')
 
     st.header('Dataset Information / Columns')
     st.image('./snapshots/data info.jpg')
