@@ -9,7 +9,7 @@ import pandas as pd
 import subprocess
 import matplotlib.pyplot as plt
 
-MainTab, EDA = st.tabs(["Main", "Explorative Data Analysis"])
+MainTab, EDA, preprocess, testresults = st.tabs(["Main", "Explorative Data Analysis", "Data Preprocessing", "Testing & Results"])
 
 with MainTab:
 
@@ -270,6 +270,11 @@ with EDA:
     st.image('./snapshots/negativewc.png')
     st.write('The 3 Wordcloud shown above are for Positive, Neutral and Negative sentiments in the dataset. Using wordcloud, we can get a sense of the data before diving into more detailed sentiment scoring and analysis. The more prominent the word, the more the word occurs.')
     
+
+with preprocess:
+    st.write('test')
+
+with testresults:
     st.header('Baseline performance of BernoulliNB & LinearSVC')
     st.image('./snapshots/baseline.jpg')
     
