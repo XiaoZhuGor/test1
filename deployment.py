@@ -279,4 +279,8 @@ with EDA:
     st.header('Best BernoulliNB & LinearSVC performance + Oversampling with SMOTE')
     st.image('./snapshots/best model smote.jpg')
 
+with preprocessing:
+
+with testresults:
+
     
