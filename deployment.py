@@ -229,15 +229,15 @@ with InfoTab:
     st.markdown("by Ng Jia Jun JD")
 
     st.header('Brief look at the dataset used (Tweets.csv)')
-    st.image('./snapshots/tweets.jpg')
+    st.image('/snapshots/tweets.jpg')
     
     st.header('Baseline performance of BernoulliNB & LinearSVC')
-    st.image('./baseline.jpg')
+    st.image('/snapshots/baseline.jpg')
 
     st.header('Baseline performance of BernoulliNB & LinearSVC + Hyperparameter Tuning using GridSearchCV')
-    st.image('./baseline tune.jpg')
+    st.image('/snapshots/baseline tune.jpg')
 
     st.header('Best BernoulliNB & LinearSVC performance + Oversampling with SMOTE')
-    st.image('./best model smote.jpg')
+    st.image('/snapshots/best model smote.jpg')
 
     
