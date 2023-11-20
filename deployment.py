@@ -228,6 +228,9 @@ with InfoTab:
     
     st.markdown("by Ng Jia Jun JD")
 
+    st.header('Brief look at the dataset used (Tweets.csv)')
+    st.image('./tweets.jpg')
+    
     st.header('Baseline performance of BernoulliNB & LinearSVC')
     st.image('./baseline.jpg')
 
