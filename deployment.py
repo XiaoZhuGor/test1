@@ -9,7 +9,7 @@ import pandas as pd
 import subprocess
 import matplotlib.pyplot as plt
 
-MainTab, InfoTab = st.tabs(["Main", "Info"])
+MainTab, EDA, preprocessing, testresults = st.tabs(["Main", "Explorative Data Analysis", "Preprocessing", "Testing & Results"])
 
 with MainTab:
 
@@ -223,7 +223,7 @@ with MainTab:
                     plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                     st.pyplot(plt)
 
-with InfoTab:
+with EDA:
     st.title("Sentiment Analysis on Airline Reviews: A Comparison Study on Machine Learning Models")
     
     st.markdown("by Ng Jia Jun JD")
@@ -234,24 +234,31 @@ with InfoTab:
 
     st.header('Dataset Information / Columns')
     st.image('./snapshots/data info.jpg')
+    st.write('Before we begin with the preprocessing of the raw text data, we will perform an Explorative Data Analysis on the dataset. Firstly, we will check the columns in the dataset. There are a total of 15 columns. The column that we are mainly focusing on for this project is ‘airline_sentiment’ and ‘text’.')
 
     st.header('First and last tweet created')
     st.image('./snapshots/firstlasttweetcreated.jpg')
+    st.write('The dataset consists of tweets ranging from the 16th of February 2015 to 25 February 2015. This means that this dataset consists of 9 days of data.')
 
     st.header('Check for null values & Remove it')
     st.image('./snapshots/nullvalues.jpg')
+    st.write('It can be seen that column ‘airline_sentiment_gold’, ‘negativereason_gold’ and ‘tweet_coord’ all have null values upwards to 90%. Therefore, we will drop these columns as they do not provide any impactful information.')
 
     st.header('Distribution of Sentiments')
     st.image('./snapshots/sentiment distribution.jpg')
+    st.write('We can see that most of the customer reviews regarding the airline are mostly negative totalling at 9178 which takes up 62.7% of the total number of sample data. As for the neutral and positive sentiment, it is at 3099 (21.2%)  and 2363 (16.1%) respectively. Moreover, we can clearly see that the dataset is imbalanced and will require oversampling during model training and testing.')
 
     st.header('Distribution of Airline types')
     st.image('./snapshots/airline types distribution.jpg')
+    st.write('According to the bar chart, most of the tweets are conveyed towards United standing at 26.1%. The second highest is US Airways at 19.9%. The third highest is American at 18.8% and the remaining Southwest, Delta and Virgin America are at 16.5%, 15.2% and 3.4% respectively.')
 
     st.header('Distribution of sentiment for each Airline types')
     st.image('./snapshots/sentiment for each airline distribution.jpg')
+    st.write('According to the bar chart shown, it can be seen that all of the airline types received more negative reviews than positive and neutral.')
 
     st.header('Overall distribution for negative reasons')
     st.image('./snapshots/overall distribution for negative reasons.jpg')
+    st.write('From the donut pie chart, we can clearly see that most of the negative reasons are related to customer service issues at 31.7%. The second highest negative reasons are due to late flight at 18.1%.')
 
     st.header('Wordcloud for Positive Reasons')
     st.image('./snapshots/positivewc.png')
@@ -261,6 +268,7 @@ with InfoTab:
 
     st.header('Wordcloud for Negative Reasons')
     st.image('./snapshots/negativewc.png')
+    st.write('The 3 Wordcloud shown above are for Positive, Neutral and Negative sentiments in the dataset. Using wordcloud, we can get a sense of the data before diving into more detailed sentiment scoring and analysis. The more prominent the word, the more the word occurs.')
     
     st.header('Baseline performance of BernoulliNB & LinearSVC')
     st.image('./snapshots/baseline.jpg')
