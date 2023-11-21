@@ -272,7 +272,23 @@ with EDA:
     
 
 with preprocess:
-    st.write('test')
+    st.title("Data Preprocessing of Raw Text Data (Tweets.csv)")
+    st.write('Before we begin with testing and training the models, we will be preprocessing the dataset. Preprocessing refers to the text cleaning and transformation steps applied to raw text data before it is fed into a machine learning model to analyze the sentiment expressed in the text. (Kosaka, 2020). The preprocessing steps that were applied in this assignments are as follows: Removing url, punctuation, html, @username, emoji Decontration (Expand words to full form like “can’t = “cannot”) Stop word removal (Remove common words that do not have significant sentiment information) Convert text to lowercase')
+    
+    st.header('Remove stop words, URL, punctuation, html, username & emojis')
+    st.image('./snapshots/pp1.jpg')
+
+    st.header('Decontraction of text')
+    st.image('./snapshots/pp2.jpg')
+
+    st.header('Separate alphanumerics')
+    st.image('./snapshots/pp3.jpg')
+
+    st.header('Apply all preprocessing functions onto the raw text data')
+    st.image('./snapshots/pp4.jpg')
+
+    st.header('Before & After comparison of Data Preprocessing')
+    st.image('./snapshots/pp5.jpg')
 
 with testresults:
     st.header('Baseline performance of BernoulliNB & LinearSVC')
