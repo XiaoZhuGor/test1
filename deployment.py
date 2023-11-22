@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import pandas as pd
 import subprocess
 import matplotlib.pyplot as plt
+pip install wordcloud
 from collections import Counter
 from wordcloud import WordCloud
 
