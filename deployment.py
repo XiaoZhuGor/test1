@@ -123,29 +123,29 @@ with MainTab:
         plt.axis('off')
         st.pyplot(plt)
 
-def top_words(text, n=10):
-    vectorizer = CountVectorizer(stop_words='english')
-    X = vectorizer.fit_transform(text)
-    words = vectorizer.get_feature_names_out()
-    word_counts = X.sum(axis=0).A1
-    word_count_dict = dict(zip(words, word_counts))
-    sorted_word_counts = sorted(word_count_dict.items(), key=lambda x: x[1], reverse=True)[:n]
-    
-    top_words, top_counts = zip(*sorted_word_counts)
-    
-    plt.figure(figsize=(10, 6))
-    plt.bar(top_words, top_counts)
-    plt.xlabel("Words")
-    plt.ylabel("Count")
-    plt.title(f"Top {n} Occurring Words")
-    plt.xticks(rotation=45)
-    st.pyplot(plt)
-    
-    # Load your pre-trained models (model1 and model2)
-    model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
-    model2 = joblib.load("LinearSVC_smote.pkl")
-    tfidf_vectorizer2 = joblib.load("tfidf_vectorizer.pkl")
-    tfidf_vectorizer = joblib.load("tfidf_vectorizerbnb.pkl")
+    def top_words(text, n=10):
+        vectorizer = CountVectorizer(stop_words='english')
+        X = vectorizer.fit_transform(text)
+        words = vectorizer.get_feature_names_out()
+        word_counts = X.sum(axis=0).A1
+        word_count_dict = dict(zip(words, word_counts))
+        sorted_word_counts = sorted(word_count_dict.items(), key=lambda x: x[1], reverse=True)[:n]
+        
+        top_words, top_counts = zip(*sorted_word_counts)
+        
+        plt.figure(figsize=(10, 6))
+        plt.bar(top_words, top_counts)
+        plt.xlabel("Words")
+        plt.ylabel("Count")
+        plt.title(f"Top {n} Occurring Words")
+        plt.xticks(rotation=45)
+        st.pyplot(plt)
+        
+        # Load your pre-trained models (model1 and model2)
+        model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
+        model2 = joblib.load("LinearSVC_smote.pkl")
+        tfidf_vectorizer2 = joblib.load("tfidf_vectorizer.pkl")
+        tfidf_vectorizer = joblib.load("tfidf_vectorizerbnb.pkl")
     
     # Create a Streamlit app
     st.title("Sentiment Analysis Application For Flight Reviews")
