@@ -1,5 +1,4 @@
 import streamlit as st
-pip install wordcloud
 import joblib
 import string
 import re
