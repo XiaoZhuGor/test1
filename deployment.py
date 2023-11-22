@@ -295,8 +295,8 @@ with test:
     st.write('Before we begin searching for the best and optimized model, we will first perform a baseline performance on each model using the default hyperparameter for the model and TF-IDF. After that, we will be fine tuning the hyperparameter for TF-IDF and each model using Grid Search Cross Validation with 5 folds. After fine tuning the hyperparameter for TF-IDF and each model and have obtained the best hyperparameter for each model, we will be applying Synthetic Minority Oversampling Technique (SMOTE) on both the best models to adjust the distribution of the classes so that it can be trained in a balanced data. From there on, we will determine which will be the best model suitable for this project.')
 
     st.header('Baseline Model')
-    st.subheader('Baseline model training and testing for BernoulliNB)
-    st.subheader('Baseline model training and testing for LinearSVC)
+    st.subheader('Baseline model training and testing for BernoulliNB')
+    st.subheader('Baseline model training and testing for LinearSVC')
 
 with results:
     st.header('Baseline performance of BernoulliNB & LinearSVC')
