@@ -296,7 +296,34 @@ with test:
 
     st.header('Baseline Model')
     st.subheader('Baseline model training and testing for BernoulliNB')
+    st.image('./snapshots/bnbtest1.jpg')
     st.subheader('Baseline model training and testing for LinearSVC')
+    st.image('./snapshots/lsvctest1.jpg')
+
+    st.header('Baseline Model + Hyperparameter Tuning using GridSearchCV')
+    st.subheader('Baseline BernoulliNB with Hyperparameter Tuning using GridSearchCV')
+    st.image('./snapshots/bnbtest2.jpg')
+    st.subheader('Baseline LinearSVC with Hyperparameter Tuning using GridSearchCV')
+    st.image('./snapshots/lsvctest2.jpg')
+
+    # Create a DataFrame with 2 rows and 6 columns
+    data = {'Column 1': [1, 2],
+            'Column 2': ['A', 'B'],
+            'Column 3': [3.14, 2.71],
+            'Column 4': ['X', 'Y'],
+            'Column 5': [True, False],
+            'Column 6': ['Apple', 'Banana']}
+    
+    df = pd.DataFrame(data)
+    
+    # Display the table in Streamlit
+    st.table(df)
+
+    st.header('Best Model + Oversampling with SMOTE')
+    st.subheader('Best BernoulliNB with Oversampling with SMOTE')
+    st.image('./snapshots/bnbtest3.jpg')
+    st.subheader('Best LinearSVC with Oversampling with SMOTE')
+    st.image('./snapshots/lsvctest4.jpg')
 
 with results:
     st.header('Baseline performance of BernoulliNB & LinearSVC')
