@@ -112,6 +112,21 @@ with MainTab:
         text = text.lower()
         text = remove_stopwords(text)
         return text
+
+    # Function to generate a word cloud
+    def generate_wordcloud(text):
+        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+        plt.figure(figsize=(10, 5))
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis('off')
+        st.pyplot(plt)
+    
+    # Function to get the top N occurring words
+    def get_top_words(text, n=10):
+        words = text.split()
+        word_counts = Counter(words)
+        top_words = word_counts.most_common(n)
+        return top_words
     
     # Load your pre-trained models (model1 and model2)
     model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
@@ -203,6 +218,17 @@ with MainTab:
                     plt.title("Sentiment Analysis Results")
                     plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                     st.pyplot(plt)
+
+                    cleaned_text_data = data['cleaned_data'].str.cat(sep=' ')
+
+                    # Display word cloud
+                    st.subheader("Word Cloud")
+                    generate_wordcloud(cleaned_text_data)
+                    
+                    # Display top 10 occurring words
+                    st.subheader("Top 10 Occurring Words")
+                    top_words = get_top_words(cleaned_text_data, n=10)
+                    st.write(pd.DataFrame(top_words, columns=['Word', 'Count']))
                 else:
                     data = pd.read_csv(uploaded_file, encoding='latin1')
     
@@ -222,6 +248,17 @@ with MainTab:
                     plt.title("Sentiment Analysis Results")
                     plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                     st.pyplot(plt)
+
+                    cleaned_text_data = data['cleaned_data'].str.cat(sep=' ')
+
+                    # Display word cloud
+                    st.subheader("Word Cloud")
+                    generate_wordcloud(cleaned_text_data)
+                    
+                    # Display top 10 occurring words
+                    st.subheader("Top 10 Occurring Words")
+                    top_words = get_top_words(cleaned_text_data, n=10)
+                    st.write(pd.DataFrame(top_words, columns=['Word', 'Count']))
 
 with EDA:
     st.title("Sentiment Analysis on Airline Reviews: A Comparison Study on Machine Learning Models")
