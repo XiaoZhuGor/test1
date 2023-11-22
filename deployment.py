@@ -310,10 +310,10 @@ with test:
     testhyperparameter = {'Hypeparameter': ['BernoulliNB (alpha)', 'LinearSVC (C)', 'max_features', 'max_df', 'ngram_range'],
             'Tested Values': ['[0.1, 0.5, 1.0]', '[0.1, 1, 10]','[0.25, 0.5, 0.75]', '[2500, 5000, 10000]','[(1,1), (1,2), (1,3)]' ]}
     
-    testhyperparameter = pd.DataFrame(data)
+    table1 = pd.DataFrame(testhyperparameter)
     
     # Display the table in Streamlit
-    st.table(testhyperparameter)
+    st.table(table1)
 
     st.header('Best Model + Oversampling with SMOTE')
     st.subheader('Best BernoulliNB with Oversampling with SMOTE')
