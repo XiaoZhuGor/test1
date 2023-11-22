@@ -1,3 +1,4 @@
+pip install wordcloud
 import streamlit as st
 import joblib
 import string
