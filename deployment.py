@@ -319,7 +319,18 @@ with test:
     st.subheader('Best BernoulliNB with Oversampling with SMOTE')
     st.image('./snapshots/bnbtest3.jpg')
     st.subheader('Best LinearSVC with Oversampling with SMOTE')
-    st.image('./snapshots/lsvctest4.jpg')
+    st.image('./snapshots/lsvctest3.jpg')
+
+    # Create a DataFrame with 2 rows and 6 columns
+    besthyperparameter = {'Models': ['Best Value (Model Hyperparameter)', 'Best Value (max_features)', 'Best Value (max_df)', 'Best Value (ngram_range)'],
+                          'BernoulliNB': ['alpha: 1.0', '5000','0.5', '1,3'],
+                          'LinearSVC': ['C: 0.1', '2500', '0.25', '1,3']
+                         }
+    
+    table2 = pd.DataFrame(besthyperparameter)
+    
+    # Display the table in Streamlit
+    st.table(table2)
 
 with results:
     st.header('Baseline performance of BernoulliNB & LinearSVC')
