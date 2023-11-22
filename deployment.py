@@ -307,17 +307,13 @@ with test:
     st.image('./snapshots/lsvctest2.jpg')
 
     # Create a DataFrame with 2 rows and 6 columns
-    data = {'Column 1': [1, 2],
-            'Column 2': ['A', 'B'],
-            'Column 3': [3.14, 2.71],
-            'Column 4': ['X', 'Y'],
-            'Column 5': [True, False],
-            'Column 6': ['Apple', 'Banana']}
+    testhyperparameter = {'Hypeparameter': ['BernoulliNB (alpha)', 'LinearSVC (C)', 'max_features', 'max_df', 'ngram_range'],
+            'Tested Values': ['[0.1, 0.5, 1.0]', '[0.1, 1, 10]','[0.25, 0.5, 0.75]', '[2500, 5000, 10000]','[(1,1), (1,2), (1,3)]' ]}
     
-    df = pd.DataFrame(data)
+    testhyperparameter = pd.DataFrame(data)
     
     # Display the table in Streamlit
-    st.table(df)
+    st.table(testhyperparameter)
 
     st.header('Best Model + Oversampling with SMOTE')
     st.subheader('Best BernoulliNB with Oversampling with SMOTE')
