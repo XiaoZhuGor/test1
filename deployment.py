@@ -1,4 +1,3 @@
-pip install wordcloud
 import streamlit as st
 import joblib
 import string
@@ -116,20 +115,31 @@ with MainTab:
         text = remove_stopwords(text)
         return text
 
-    # Function to generate a word cloud
     def generate_wordcloud(text):
-        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
-        plt.figure(figsize=(10, 5))
-        plt.imshow(wordcloud, interpolation='bilinear')
-        plt.axis('off')
-        st.pyplot(plt)
+    wordcloud = WordCloud(width=800, height=400, random_state=21, max_font_size=110, background_color='white').generate(text)
+
+    plt.figure(figsize=(10, 7))
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis('off')
+    st.pyplot(plt)
+
+def top_words(text, n=10):
+    vectorizer = CountVectorizer(stop_words='english')
+    X = vectorizer.fit_transform(text)
+    words = vectorizer.get_feature_names_out()
+    word_counts = X.sum(axis=0).A1
+    word_count_dict = dict(zip(words, word_counts))
+    sorted_word_counts = sorted(word_count_dict.items(), key=lambda x: x[1], reverse=True)[:n]
     
-    # Function to get the top N occurring words
-    def get_top_words(text, n=10):
-        words = text.split()
-        word_counts = Counter(words)
-        top_words = word_counts.most_common(n)
-        return top_words
+    top_words, top_counts = zip(*sorted_word_counts)
+    
+    plt.figure(figsize=(10, 6))
+    plt.bar(top_words, top_counts)
+    plt.xlabel("Words")
+    plt.ylabel("Count")
+    plt.title(f"Top {n} Occurring Words")
+    plt.xticks(rotation=45)
+    st.pyplot(plt)
     
     # Load your pre-trained models (model1 and model2)
     model1 = joblib.load("bnb_smote.pkl")  # Replace with your model file path
@@ -158,8 +168,6 @@ with MainTab:
         
         # Create a button to make predictions
         prediction_button = st.form_submit_button("Make Prediction")
-    
-        
     
     
     # Check if the form is submitted
@@ -222,16 +230,11 @@ with MainTab:
                     plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                     st.pyplot(plt)
 
-                    cleaned_text_data = data['cleaned_data'].str.cat(sep=' ')
-
-                    # Display word cloud
-                    st.subheader("Word Cloud")
-                    generate_wordcloud(cleaned_text_data)
-                    
+                    # Generate word cloud for cleaned data
+                    generate_wordcloud(' '.join(data['cleaned_data']))
+                
                     # Display top 10 occurring words
-                    st.subheader("Top 10 Occurring Words")
-                    top_words = get_top_words(cleaned_text_data, n=10)
-                    st.write(pd.DataFrame(top_words, columns=['Word', 'Count']))
+                    top_words(data['cleaned_data'])
                 else:
                     data = pd.read_csv(uploaded_file, encoding='latin1')
     
@@ -252,17 +255,11 @@ with MainTab:
                     plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                     st.pyplot(plt)
 
-                    cleaned_text_data = data['cleaned_data'].str.cat(sep=' ')
-
-                    # Display word cloud
-                    st.subheader("Word Cloud")
-                    generate_wordcloud(cleaned_text_data)
-                    
+                    # Generate word cloud for cleaned data
+                    generate_wordcloud(' '.join(data['cleaned_data']))
+                
                     # Display top 10 occurring words
-                    st.subheader("Top 10 Occurring Words")
-                    top_words = get_top_words(cleaned_text_data, n=10)
-                    st.write(pd.DataFrame(top_words, columns=['Word', 'Count']))
-
+                    top_words(data['cleaned_data'])
 with EDA:
     st.title("Sentiment Analysis on Airline Reviews: A Comparison Study on Machine Learning Models")
     
