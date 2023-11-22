@@ -116,12 +116,12 @@ with MainTab:
         return text
 
     def generate_wordcloud(text):
-    wordcloud = WordCloud(width=800, height=400, random_state=21, max_font_size=110, background_color='white').generate(text)
-
-    plt.figure(figsize=(10, 7))
-    plt.imshow(wordcloud, interpolation="bilinear")
-    plt.axis('off')
-    st.pyplot(plt)
+        wordcloud = WordCloud(width=800, height=400, random_state=21, max_font_size=110, background_color='white').generate(text)
+    
+        plt.figure(figsize=(10, 7))
+        plt.imshow(wordcloud, interpolation="bilinear")
+        plt.axis('off')
+        st.pyplot(plt)
 
 def top_words(text, n=10):
     vectorizer = CountVectorizer(stop_words='english')
