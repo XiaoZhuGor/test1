@@ -7,10 +7,9 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import pandas as pd
 import subprocess
-import matplotlib.pyplot as plt
-pip install wordcloud
-from collections import Counter
 from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+from collections import Counter
 
 MainTab, EDA, preprocess, test, results = st.tabs(["Main", "Explorative Data Analysis", "Data Preprocessing", "Testing", "Results"])
 
