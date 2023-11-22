@@ -229,12 +229,6 @@ with MainTab:
                     plt.title("Sentiment Analysis Results")
                     plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                     st.pyplot(plt)
-
-                    # Generate word cloud for cleaned data
-                    generate_wordcloud(' '.join(data['cleaned_data']))
-                
-                    # Display top 10 occurring words
-                    top_words(data['cleaned_data'])
                 else:
                     data = pd.read_csv(uploaded_file, encoding='latin1')
     
@@ -255,11 +249,6 @@ with MainTab:
                     plt.ylim(0, 15000)  # Set the Y-axis limit to 1000 per inch
                     st.pyplot(plt)
 
-                    # Generate word cloud for cleaned data
-                    generate_wordcloud(' '.join(data['cleaned_data']))
-                
-                    # Display top 10 occurring words
-                    top_words(data['cleaned_data'])
 with EDA:
     st.title("Sentiment Analysis on Airline Reviews: A Comparison Study on Machine Learning Models")
     
