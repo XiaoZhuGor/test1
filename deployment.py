@@ -9,7 +9,7 @@ import pandas as pd
 import subprocess
 import matplotlib.pyplot as plt
 
-MainTab, EDA, preprocess, test, results, achievements, limitfuture = st.tabs(["Main", "Explorative Data Analysis", "Data Preprocessing", "Testing", "Results", "Achievements", "Limitations & Future Works"])
+MainTab, EDA, preprocess, test, results = st.tabs(["Main", "Explorative Data Analysis", "Data Preprocessing", "Testing", "Results"])
 
 with MainTab:
 
@@ -349,9 +349,3 @@ with results:
     st.image('./snapshots/best model smote.jpg')
     st.write('Based on the results from Table 3, we have observed that both algorithms did improve slightly as well after oversampling the dataset to make it balanced and using the best hyperparameters for each model and TF-IDF obtained. However for BernoulliNB, it did not show any improvement in accuracy, precision and recall but showed significant improvement in F1-Score. As for LinearSVC, it showed decreased performance in terms of accuracy, precision and recall and only showed little improvement in F1-Score. The reason why BernoulliNB showed significant improvement in F1-Score after applying SMOTE suggests that BernoulliNB is better at finding a balance between precision and recall for classes. As for LinearSVC, we have observed that it may not benefit much when performing oversampling using SMOTE. Nonetheless, we can confirm that the improvement of models’ performance was because of the class distribution being balanced after duplicating data to synthesize new data from the minority class which are positive and neutral.')
 
-with achievements:
-    st.header('Achievements')
-    st.write('For this assignment, two machine learning models were used to test and train against airline reviews obtained from Kaggle. The two machine learning models were BernoulliNB and LinearSVC. It can be observed that performing optimization and tuning on the models’ and TF-IDF hyperparameters have significantly improved the models’ performance in terms of accuracy, precision, recall and f1-score. Furthermore, by applying SMOTE to perform oversampling on the imbalanced dataset also have shown slight improvement in performance when using the best hyperparameter for the models and TF-IDF. Based on the results for both models, we can conclude that Bernoulli Naive Bayes (BernoulliNB) is the better performing model against Linear Support Vector Classifier (LinearSVC) with overall higher accuracy, precision, recall and f1-score. We believe that BernoulliNB is well suited for data that follows a binomial distribution where features are binary. Besides that, BernoulliNB can perform better than LinearSVC when dealing with text data with many features. Moreover, the computational efficiency of BernoulliNB is also more efficient than LinearSVC when dealing with large datasets. According to research by (Kusumaningrum, 2018), it mentions that using SMOTE, it creates synthetic binary samples that align well with the data distribution, making it easier for BernoulliNB to learn and classify these synthetic samples effectively. Another research by (Umer et al., 2021), suggests that LinearSVC will not show much improvement when using SMOTE because LinearSVC works with continuous numeric features and aims to find a hyperplane that best separates the data. Therefore, introducing synthetic samples may not improve LinearSVC performance. All in all, all of the objectives that were stated have been fulfilled as both models used for testing and training have obtained accuracy, precision, recall and f1-score higher than 80%.')
-
-with limitfuture:
-    st.header('Limitations & Future Works')
