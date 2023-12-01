@@ -305,7 +305,7 @@ with test:
     st.image('./snapshots/bnbtest2.jpg')
     st.subheader('Baseline LinearSVC with Hyperparameter Tuning using GridSearchCV')
     st.image('./snapshots/lsvctest2.jpg')
-
+    st.subheader('Tested Hyperparameter Value')
     # Create a DataFrame with 2 rows and 6 columns
     testhyperparameter = {'Hypeparameter': ['BernoulliNB (alpha)', 'LinearSVC (C)', 'max_features', 'max_df', 'ngram_range'],
             'Tested Values': ['[0.1, 0.5, 1.0]', '[0.1, 1, 10]','[0.25, 0.5, 0.75]', '[2500, 5000, 10000]','[(1,1), (1,2), (1,3)]' ]}
@@ -314,13 +314,18 @@ with test:
     
     # Display the table in Streamlit
     st.table(table1)
+    st.subheader('Justification for tested hyperparameter value for BernoulliNB')
+    st.write('Based on our research, among the hyperparameters, the one that often has a significant impact is the smoothing parameter (alpha). The alpha hyperparameter is important in handling the issue of zero probabilities for certain features in the training data. In sentiment analysis, especially with text data, there might be words that appear in one class (positive or negative sentiment) but not in the other. Without smoothing, the probability of the entire document or sentence being assigned to a certain class would be zero if any of its features have zero probability in that class. As for other hyperparameters such as binarize or class_prior, these hyperparameters are better off left at their default values.')
+    st.subheader('Justification for tested hyperparameter value for LinearSVC')
+    st.write('Based on our research, the most critical hyperparameter to tune for LinearSVC is C which is a regularization parameter. In simple terms, a smaller C encourages a broader margin, potentially allowing for more training errors but avoiding overfitting. A larger C penalizes training errors more heavily, leading to a narrower margin. In sentiment analysis, adjusting C can influence the model's ability to generalize from the training data to unseen test data. Besides that, tuning C allows the model to adapt to the noise level in the training data which can improve its ability to make accurate predictions. As for other hyperparameters such as loss or penalty, these hyperparameters are better left at their default values.')
+    
 
     st.header('Best Model + Oversampling with SMOTE')
     st.subheader('Best BernoulliNB with Oversampling with SMOTE')
     st.image('./snapshots/bnbtest3.jpg')
     st.subheader('Best LinearSVC with Oversampling with SMOTE')
     st.image('./snapshots/lsvctest3.jpg')
-
+    st.subheader('Best Hyperparameter Value')
     # Create a DataFrame with 2 rows and 6 columns
     besthyperparameter = {'Models': ['Best Value (Model Hyperparameter)', 'Best Value (max_features)', 'Best Value (max_df)', 'Best Value (ngram_range)'],
                           'BernoulliNB': ['alpha: 1.0', '5000','0.5', '1,3'],
