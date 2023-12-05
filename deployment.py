@@ -109,6 +109,7 @@ with MainTab:
         text = separate_alphanumeric(text)
         text = unique_char(cont_rep_char, text)
         text = char(text)
+        text = remove_stopwords(text)
         text = text.lower()
         return text
     
