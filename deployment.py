@@ -110,7 +110,6 @@ with MainTab:
         text = unique_char(cont_rep_char, text)
         text = char(text)
         text = text.lower()
-        text = remove_stopwords(text)
         return text
     
     # Load your pre-trained models (model1 and model2)
